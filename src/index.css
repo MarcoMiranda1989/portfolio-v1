@@ -2,3 +2,23 @@
 
 @source "../index.html";
 @source "./**/*.{js,jsx,ts,tsx}";
+
+@theme {
+  --font-jetbrains: "JetBrains Mono", monospace;
+  --color-mint: #1DBD8E;
+  --color-dark-slate: #2D3F54;
+  --color-slate-blue: #52647A;
+  --color-apple: #73CC80;
+  --color-navy: #004C94;
+  --color-royal: #006ECF;
+  --color-sky: #3C93FA;
+  --color-turquoise: #00D4C6;
+  --color-teal: #0FA69D;
+  --color-petrol: #028183;
+}
+
+@layer base {
+  html {
+    font-family: "JetBrains Mono", monospace;
+  }
+}
