@@ -22,3 +22,24 @@
     font-family: "JetBrains Mono", monospace;
   }
 }
+
+@layer utilities {
+  .scrollable-content {
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  }
+  .scrollable-content::-webkit-scrollbar {
+    width: 5px;
+  }
+  .scrollable-content::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollable-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 3px;
+  }
+  .scrollable-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+  }
+}
