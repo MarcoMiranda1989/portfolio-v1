@@ -19,11 +19,24 @@ const mosaicos = [
 export const App = () => {
   const [selectedId, setSelectedId] = useState(null);
   const [copiedMsg, setCopiedMsg] = useState('');
+  const [notFoundProject, setNotFoundProject] = useState(null);
 
   const handleCopy = (text, msg) => {
     navigator.clipboard.writeText(text);
     setCopiedMsg(msg);
     setTimeout(() => setCopiedMsg(''), 2000);
+  };
+
+  const handleProjectLink = (url, projectName) => {
+    if (!url) {
+      setNotFoundProject(projectName);
+      return;
+    }
+    try {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    } catch {
+      setNotFoundProject(projectName);
+    }
   };
 
   const selectedMosaic = useMemo(() => mosaicos.find(m => m.id === selectedId), [selectedId]);
@@ -241,6 +254,12 @@ export const App = () => {
                           <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/15 rounded-full text-xs font-medium"><Server size={13} /> Node</span>
                           <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/15 rounded-full text-xs font-medium"><Database size={13} /> PostgreSQL</span>
                         </div>
+                        <div className="flex flex-wrap gap-3 mt-4">
+                          <button onClick={() => handleProjectLink('https://github.com/MarcoMiranda1989/api-artistas-node-postgres-prisma', 'API RESTFUL')} className="inline-flex items-center gap-2 px-4 py-2 border border-white/30 rounded-lg hover:bg-white/20 transition-colors text-white text-sm">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                            Repositorio
+                          </button>
+                        </div>
                       </div>
                       <div className="bg-white/10 rounded-xl p-6 border border-white/30 backdrop-blur-sm hover:bg-white/20 hover:-translate-y-1 hover:shadow-xl hover:shadow-white/10 transition-all duration-300">
                         <div className="w-full h-40 rounded-lg overflow-hidden mb-4 border border-white/10 shadow-lg shadow-black/20">
@@ -256,9 +275,15 @@ export const App = () => {
                           <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/15 rounded-full text-xs font-medium"><Palette size={13} /> Tailwind</span>
                           <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/15 rounded-full text-xs font-medium"><Flame size={13} /> Firebase</span>
                         </div>
-                        <a href="https://btw-lili-app.vercel.app/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-4 px-4 py-2 border border-white/30 rounded-lg hover:bg-white/20 transition-colors text-white text-sm">
-                          <Globe size={16} /> Visitar sitio
-                        </a>
+                        <div className="flex flex-wrap gap-3 mt-4">
+                          <button onClick={() => handleProjectLink('https://github.com/MarcoMiranda1989/btwlili-app', 'BTW Shopping')} className="inline-flex items-center gap-2 px-4 py-2 border border-white/30 rounded-lg hover:bg-white/20 transition-colors text-white text-sm">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                            Repositorio
+                          </button>
+                          <button onClick={() => handleProjectLink('https://btw-lili-app.vercel.app/', 'BTW Shopping')} className="inline-flex items-center gap-2 px-4 py-2 border border-white/30 rounded-lg hover:bg-white/20 transition-colors text-white text-sm">
+                            <Globe size={16} /> Sitio web
+                          </button>
+                        </div>
                       </div>
                       <div className="bg-white/10 rounded-xl p-6 border border-white/30 backdrop-blur-sm hover:bg-white/20 hover:-translate-y-1 hover:shadow-xl hover:shadow-white/10 transition-all duration-300">
                         <div className="w-full h-40 rounded-lg overflow-hidden mb-4 border border-white/10 shadow-lg shadow-black/20">
@@ -277,6 +302,15 @@ export const App = () => {
                           <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/15 rounded-full text-xs font-medium"><Braces size={13} /> JS</span>
                           <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/15 rounded-full text-xs font-medium"><Palette size={13} /> Tailwind</span>
                           <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/15 rounded-full text-xs font-medium"><Flame size={13} /> Firebase</span>
+                        </div>
+                        <div className="flex flex-wrap gap-3 mt-4">
+                          <button onClick={() => handleProjectLink('https://github.com/Memo190804/PegasoTravels', 'Pegaso Web')} className="inline-flex items-center gap-2 px-4 py-2 border border-white/30 rounded-lg hover:bg-white/20 transition-colors text-white text-sm">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                            Repositorio
+                          </button>
+                          <button onClick={() => handleProjectLink(null, 'Pegaso Web')} className="inline-flex items-center gap-2 px-4 py-2 border border-white/30 rounded-lg hover:bg-white/20 transition-colors text-white text-sm">
+                            <Globe size={16} /> Sitio web
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -327,6 +361,36 @@ export const App = () => {
           className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] px-6 py-3 bg-dark-slate text-white rounded-xl shadow-2xl border border-white/20 text-sm font-medium"
         >
           {copiedMsg}
+        </motion.div>
+      )}
+
+      {notFoundProject && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[70] flex items-center justify-center p-4"
+        >
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setNotFoundProject(null)} />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ type: "spring", damping: 20, stiffness: 200 }}
+            className="relative bg-dark-slate border-2 border-white/20 rounded-2xl p-8 max-w-md w-full text-center text-white shadow-2xl"
+          >
+            <div className="text-8xl font-black text-white/10 leading-none mb-2">404</div>
+            <h3 className="text-xl font-bold mb-2">Página no disponible</h3>
+            <p className="text-sm text-white/70 mb-6">
+              El sitio web de <span className="font-semibold text-white/90">{notFoundProject}</span> aún no está disponible.
+            </p>
+            <button
+              onClick={() => setNotFoundProject(null)}
+              className="px-6 py-2.5 border-2 border-white rounded-lg hover:bg-white/20 transition-colors text-sm font-medium"
+            >
+              Cerrar
+            </button>
+          </motion.div>
         </motion.div>
       )}
     </div>
